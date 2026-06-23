@@ -1,7 +1,8 @@
 import { PropsWithChildren } from "react";
 import { ScrollView, StyleSheet, View, ViewStyle, RefreshControl } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { colors, spacing } from "@/constants/theme";
+import { useTheme } from "@/constants/theme";
+import { haptics } from "@/utils/haptics";
 
 interface ScreenProps {
   scroll?: boolean;
@@ -11,29 +12,36 @@ interface ScreenProps {
 }
 
 export function Screen({ children, scroll = true, style, refreshing, onRefresh }: PropsWithChildren<ScreenProps>) {
+  const { colors, spacing } = useTheme();
+  
+  const handleRefresh = () => {
+    if (onRefresh) {
+      haptics.impactLight();
+      onRefresh();
+    }
+  };
+
   const content = scroll ? (
     <ScrollView
-      contentContainerStyle={[styles.content, style]}
-      refreshControl={onRefresh ? <RefreshControl refreshing={!!refreshing} onRefresh={onRefresh} /> : undefined}
+      contentContainerStyle={[styles.content, { padding: spacing.lg, gap: spacing.lg }, style]}
+      refreshControl={onRefresh ? <RefreshControl refreshing={!!refreshing} onRefresh={handleRefresh} /> : undefined}
       showsVerticalScrollIndicator={false}
     >
       {children}
     </ScrollView>
   ) : (
-    <View style={[styles.content, styles.flex, style]}>{children}</View>
+    <View style={[styles.content, { padding: spacing.lg, gap: spacing.lg }, styles.flex, style]}>{children}</View>
   );
 
-  return <SafeAreaView style={styles.root}>{content}</SafeAreaView>;
+  return <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>{content}</SafeAreaView>;
 }
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
-    backgroundColor: colors.background
+    flex: 1
   },
   content: {
-    padding: spacing.lg,
-    gap: spacing.lg
+    // spacing layout dynamically configured in render
   },
   flex: {
     flex: 1

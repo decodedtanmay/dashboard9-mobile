@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { router } from "expo-router";
-import { Bell, FileText, LogOut, Settings, Shield } from "lucide-react-native";
+import { CircleHelp, FileText, LogOut, Settings, Shield, PieChart, MapPin, Users } from "lucide-react-native";
 import { AppText } from "@/components/common/AppText";
 import { Screen } from "@/components/common/Screen";
 import { colors, radius, spacing } from "@/constants/theme";
@@ -20,11 +20,15 @@ export function MoreScreen() {
     <Screen>
       <View>
         <AppText variant="title">More</AppText>
-        <AppText muted>Reports, alerts, preferences, and role-specific summaries.</AppText>
+        <AppText muted>Reports, preferences, support, and role-specific summaries.</AppText>
       </View>
-      <MenuItem label="Alerts & Progress" icon={<Bell size={20} color={colors.primary} />} onPress={() => router.push("/(main)/more/alerts")} />
+      <View style={{ height: spacing.lg }} />
       <MenuItem label="Reports" icon={<FileText size={20} color={colors.primary} />} onPress={() => router.push("/(main)/more/reports")} />
+      <MenuItem label="Analytics" icon={<PieChart size={20} color={colors.primary} />} onPress={() => console.log("Analytics")} />
+      <MenuItem label="Sites" icon={<MapPin size={20} color={colors.primary} />} onPress={() => console.log("Sites")} />
+      <MenuItem label="Users" icon={<Users size={20} color={colors.primary} />} onPress={() => console.log("Users")} />
       <MenuItem label="Settings" icon={<Settings size={20} color={colors.primary} />} onPress={() => router.push("/(main)/more/settings")} />
+      <MenuItem label="Help & Support" icon={<CircleHelp size={20} color={colors.primary} />} onPress={() => router.push("/(main)/helpdesk")} />
       {isAdmin ? <MenuItem label="Admin Summary" icon={<Shield size={20} color={colors.primary} />} onPress={() => router.push("/(main)/more/admin")} /> : null}
       <MenuItem label="Logout" icon={<LogOut size={20} color={colors.critical} />} onPress={onLogout} danger />
     </Screen>

@@ -6,10 +6,16 @@ import { InfoCard } from "@/components/cards/InfoCard";
 import { colors, radius, spacing } from "@/constants/theme";
 import { container } from "@/core/container";
 import { useAuthStore } from "@/store/authStore";
+import { useThemeStore } from "@/store/themeStore";
 
 export function SettingsScreen() {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
+  const { themePreference, setThemePreference } = useThemeStore();
+
+  const toggleTheme = () => {
+    setThemePreference(themePreference === "light" ? "dark" : "light");
+  };
 
   async function onLogout() {
     await logout();
@@ -25,7 +31,12 @@ export function SettingsScreen() {
       </InfoCard>
       <InfoCard title="Preferences">
         <View style={styles.row}><AppText>Language</AppText><AppText muted>English</AppText></View>
-        <View style={styles.row}><AppText>Theme</AppText><AppText muted>System</AppText></View>
+        <View style={styles.row}>
+          <AppText>Theme</AppText>
+          <Pressable onPress={toggleTheme}>
+            <AppText muted style={{ textTransform: "capitalize" }}>{themePreference}</AppText>
+          </Pressable>
+        </View>
         <View style={styles.row}><AppText>Offline Queue</AppText><AppText muted>{container.syncQueue.pendingCount()} pending</AppText></View>
       </InfoCard>
       <Pressable style={styles.clear} onPress={() => container.cacheManager.clearAll()}>
