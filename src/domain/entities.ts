@@ -314,6 +314,7 @@ export interface EmailAlertLog {
   sent_time: string;
   ticket_id?: string;
   created_at: string;
+  acknowledged?: boolean;
 }
 
 export interface DashboardSummary {

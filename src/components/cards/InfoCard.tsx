@@ -1,15 +1,29 @@
 import { PropsWithChildren } from "react";
 import { StyleSheet, View } from "react-native";
 import { AppText } from "@/components/common/AppText";
-import { colors, radius, shadow, spacing } from "@/constants/theme";
+import { useTheme } from "@/constants/theme";
 
 interface InfoCardProps {
   title?: string;
 }
 
 export function InfoCard({ title, children }: PropsWithChildren<InfoCardProps>) {
+  const { colors, radius, shadow, spacing } = useTheme();
+
   return (
-    <View style={styles.card}>
+    <View 
+      style={[
+        styles.card, 
+        { 
+          backgroundColor: colors.surface, 
+          borderRadius: radius.lg,
+          padding: spacing.lg,
+          gap: spacing.md,
+          borderColor: colors.borderLight,
+        },
+        shadow.card
+      ]}
+    >
       {title ? <AppText variant="subtitle">{title}</AppText> : null}
       {children}
     </View>
@@ -18,12 +32,6 @@ export function InfoCard({ title, children }: PropsWithChildren<InfoCardProps>) 
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: colors.surface,
-    borderRadius: radius.md,
-    padding: spacing.lg,
-    gap: spacing.md,
-    borderColor: colors.border,
-    borderWidth: 1,
-    ...shadow.card
+    borderWidth: 1
   }
 });

@@ -1,6 +1,7 @@
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 
+// @ts-expect-error - documentDirectory exists but types are missing
 const LOG_FILE_PATH = FileSystem.documentDirectory + 'app_errors.log';
 
 export interface LogEntry {
@@ -83,8 +84,11 @@ export async function shareLogs() {
 // Set up global error tracking
 export function initGlobalErrorTracking() {
   // Catch JS errors
+  // @ts-expect-error - ErrorUtils exists on RN global
   const originalErrorHandler = global.ErrorUtils?.getGlobalHandler();
+  // @ts-expect-error
   if (global.ErrorUtils) {
+    // @ts-expect-error
     global.ErrorUtils.setGlobalHandler(async (error: any, isFatal?: boolean) => {
       await writeLog(
         isFatal ? 'fatal' : 'error',

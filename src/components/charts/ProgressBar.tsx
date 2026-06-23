@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { colors, radius, spacing } from "@/constants/theme";
+import { colors, radius, spacing, typography } from "@/constants/theme";
 import { AppText } from "@/components/common/AppText";
 
 interface ProgressBarProps {
@@ -14,7 +14,7 @@ export function ProgressBar({ label, value, total, color = colors.primary }: Pro
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <AppText variant="caption" muted>
+        <AppText variant="caption" style={styles.labelText}>
           {label}
         </AppText>
         <AppText variant="caption" style={styles.percent}>
@@ -30,17 +30,24 @@ export function ProgressBar({ label, value, total, color = colors.primary }: Pro
 
 const styles = StyleSheet.create({
   container: {
-    gap: spacing.xs
+    gap: spacing.sm,
+    marginVertical: spacing.xs
   },
   header: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  labelText: {
+    color: colors.textSecondary,
+    fontWeight: typography.weights.semibold
   },
   percent: {
-    fontWeight: "800"
+    fontWeight: typography.weights.bold,
+    color: colors.text
   },
   track: {
-    height: 8,
+    height: 10,
     borderRadius: radius.pill,
     backgroundColor: colors.surfaceAlt,
     overflow: "hidden"
