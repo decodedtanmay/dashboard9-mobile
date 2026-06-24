@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { Redirect, Tabs } from "expo-router";
-import { Activity, Bell, LayoutDashboard, Map, MoreHorizontal } from "lucide-react-native";
+import { Activity, Bell, LayoutDashboard, MoreHorizontal } from "lucide-react-native";
 import { BlurView } from "expo-blur";
 import { useTheme } from "@/constants/theme";
 import { useAuthStore } from "@/store/authStore";
@@ -41,7 +41,6 @@ export default function MainLayout() {
       >
         <Tabs.Screen name="dashboard" options={{ title: "Dashboard", tabBarIcon: ({ color }) => <LayoutDashboard size={20} color={color} /> }} />
         <Tabs.Screen name="alerts" options={{ title: "Alerts", tabBarIcon: ({ color }) => <Bell size={20} color={color} /> }} />
-        <Tabs.Screen name="map" options={{ title: "Map", tabBarIcon: ({ color }) => <Map size={20} color={color} /> }} />
         <Tabs.Screen name="monitoring" options={{ title: "Monitoring", tabBarIcon: ({ color }) => <Activity size={20} color={color} /> }} />
         <Tabs.Screen 
           name="more" 
@@ -56,7 +55,8 @@ export default function MainLayout() {
             }
           }}
         />
-        <Tabs.Screen name="helpdesk" options={{ title: "Helpdesk", href: null }} />
+        <Tabs.Screen name="map" options={{ href: null }} />
+        <Tabs.Screen name="helpdesk" options={{ href: null }} />
       </Tabs>
       <MoreBottomSheet />
     </View>

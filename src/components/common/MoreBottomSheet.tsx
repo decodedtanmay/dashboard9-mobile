@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useRef, useEffect } from "react";
 import { View, StyleSheet, Pressable } from "react-native";
 import BottomSheet, { BottomSheetView, BottomSheetBackdrop } from "@gorhom/bottom-sheet";
-import { CircleHelp, FileText, LogOut, Settings, Shield, PieChart, MapPin, Users } from "lucide-react-native";
+import { CircleHelp, FileText, LogOut, Settings, Shield, PieChart, MapPin, Users, Map } from "lucide-react-native";
 import { router } from "expo-router";
 import { AppText } from "@/components/common/AppText";
 import { useTheme } from "@/constants/theme";
@@ -74,6 +74,14 @@ export function MoreBottomSheet() {
         </View>
 
         <View style={styles.grid}>
+          <MenuItem 
+            label="Regions" 
+            icon={<Map size={20} color={colors.primary} />} 
+            onPress={() => {
+              closeMore();
+              router.push("/(main)/more/regions");
+            }} 
+          />
           <MenuItem 
             label="Reports" 
             icon={<FileText size={20} color={colors.primary} />} 

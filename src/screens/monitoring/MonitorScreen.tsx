@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { View } from "react-native";
 import { AppText } from "@/components/common/AppText";
+import { BackButton } from "@/components/common/BackButton";
 import { RegionSelector } from "@/components/common/RegionSelector";
 import { Screen } from "@/components/common/Screen";
 import { SearchInput } from "@/components/common/SearchInput";
@@ -38,6 +39,7 @@ export function MonitorScreen() {
 
   return (
     <Screen refreshing={query.isFetching} onRefresh={() => query.refetch()}>
+      <BackButton />
       <View>
         <AppText variant="title">Monitoring</AppText>
         <AppText muted>Mobile-first operational view for field checks and compliance review.</AppText>

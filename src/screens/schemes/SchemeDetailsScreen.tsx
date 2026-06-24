@@ -2,6 +2,7 @@ import { useLocalSearchParams } from "expo-router";
 import { useMemo, useState } from "react";
 import { Linking, Pressable, StyleSheet, View } from "react-native";
 import { AppText } from "@/components/common/AppText";
+import { BackButton } from "@/components/common/BackButton";
 import { Screen } from "@/components/common/Screen";
 import { SegmentedControl } from "@/components/common/SegmentedControl";
 import { StatusBadge } from "@/components/common/StatusBadge";
@@ -35,6 +36,7 @@ export function SchemeDetailsScreen() {
   if (!scheme) {
     return (
       <Screen>
+        <BackButton />
         <AppText variant="title">Scheme Details</AppText>
         <AppText muted>{query.isLoading ? "Loading scheme..." : "Scheme not found."}</AppText>
       </Screen>
@@ -43,6 +45,7 @@ export function SchemeDetailsScreen() {
 
   return (
     <Screen refreshing={query.isFetching} onRefresh={() => query.refetch()}>
+      <BackButton />
       <InfoCard>
         <AppText variant="title">{scheme.scheme_name}</AppText>
         <AppText muted>

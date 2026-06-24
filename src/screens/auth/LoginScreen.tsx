@@ -21,7 +21,7 @@ export function LoginScreen() {
   }
 
   return (
-    <Screen style={styles.root}>
+    <Screen style={styles.root} hasTabBar={false}>
       <View style={styles.brand}>
         <View style={styles.logo}>
           <Droplets size={36} color="white" />

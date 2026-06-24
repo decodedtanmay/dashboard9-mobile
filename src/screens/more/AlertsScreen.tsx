@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, View } from "react-native";
 import { useMutation } from "@tanstack/react-query";
 import { ShieldCheck } from "lucide-react-native";
 import { AppText } from "@/components/common/AppText";
+import { BackButton } from "@/components/common/BackButton";
 import { Screen } from "@/components/common/Screen";
 import { StatusBadge } from "@/components/common/StatusBadge";
 import { InfoCard } from "@/components/cards/InfoCard";
@@ -23,6 +24,7 @@ export function AlertsScreen() {
 
   return (
     <Screen refreshing={query.isFetching} onRefresh={() => query.refetch()}>
+      <BackButton />
       <View style={styles.header}>
         <AppText variant="title">Alerts</AppText>
         <AppText muted style={styles.subtitle}>Critical alert logs mirror `email_alert_logs` and can later deep-link from push notifications.</AppText>

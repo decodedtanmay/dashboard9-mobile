@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, View } from "react-native";
 import { router } from "expo-router";
 import { AppText } from "@/components/common/AppText";
+import { BackButton } from "@/components/common/BackButton";
 import { Screen } from "@/components/common/Screen";
 import { InfoCard } from "@/components/cards/InfoCard";
 import { colors, radius, spacing } from "@/constants/theme";
@@ -24,6 +25,7 @@ export function SettingsScreen() {
 
   return (
     <Screen>
+      <BackButton />
       <AppText variant="title">Settings</AppText>
       <InfoCard title="Profile">
         <AppText>{user?.name ?? user?.username}</AppText>

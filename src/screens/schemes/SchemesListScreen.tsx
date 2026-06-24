@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { View } from "react-native";
 import { router } from "expo-router";
 import { AppText } from "@/components/common/AppText";
+import { BackButton } from "@/components/common/BackButton";
 import { RegionSelector } from "@/components/common/RegionSelector";
 import { Screen } from "@/components/common/Screen";
 import { SearchInput } from "@/components/common/SearchInput";
@@ -25,6 +26,7 @@ export function SchemesListScreen() {
 
   return (
     <Screen refreshing={query.isFetching} onRefresh={() => query.refetch()}>
+      <BackButton />
       <View>
         <AppText variant="title">Schemes</AppText>
         <AppText muted>Search and inspect scheme status, village coverage, ESR integration, and agency ownership.</AppText>

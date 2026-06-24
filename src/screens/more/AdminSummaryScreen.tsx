@@ -1,5 +1,6 @@
 import { Shield } from "lucide-react-native";
 import { AppText } from "@/components/common/AppText";
+import { BackButton } from "@/components/common/BackButton";
 import { Screen } from "@/components/common/Screen";
 import { MetricCard } from "@/components/cards/MetricCard";
 import { InfoCard } from "@/components/cards/InfoCard";
@@ -11,6 +12,7 @@ export function AdminSummaryScreen() {
   const data = query.data;
   return (
     <Screen refreshing={query.isFetching} onRefresh={() => query.refetch()}>
+      <BackButton />
       <AppText variant="title">Admin Summary</AppText>
       <AppText muted>Mobile intentionally keeps admin features view-only. Data import, report management, and logs remain desktop workflows.</AppText>
       <MetricCard label="Total Schemes" value={formatNumber(data?.totalSchemes ?? 0)} icon={Shield} />

@@ -9,9 +9,10 @@ interface ScreenProps {
   style?: ViewStyle;
   refreshing?: boolean;
   onRefresh?: () => void;
+  hasTabBar?: boolean;
 }
 
-export function Screen({ children, scroll = true, style, refreshing, onRefresh }: PropsWithChildren<ScreenProps>) {
+export function Screen({ children, scroll = true, style, refreshing, onRefresh, hasTabBar = true }: PropsWithChildren<ScreenProps>) {
   const { colors, spacing } = useTheme();
   
   const handleRefresh = () => {
@@ -21,16 +22,18 @@ export function Screen({ children, scroll = true, style, refreshing, onRefresh }
     }
   };
 
+  const bottomPadding = hasTabBar ? 96 : spacing.lg;
+
   const content = scroll ? (
     <ScrollView
-      contentContainerStyle={[styles.content, { padding: spacing.lg, gap: spacing.lg }, style]}
+      contentContainerStyle={[styles.content, { padding: spacing.lg, paddingBottom: bottomPadding, gap: spacing.lg }, style]}
       refreshControl={onRefresh ? <RefreshControl refreshing={!!refreshing} onRefresh={handleRefresh} /> : undefined}
       showsVerticalScrollIndicator={false}
     >
       {children}
     </ScrollView>
   ) : (
-    <View style={[styles.content, { padding: spacing.lg, gap: spacing.lg }, styles.flex, style]}>{children}</View>
+    <View style={[styles.content, { padding: spacing.lg, paddingBottom: bottomPadding, gap: spacing.lg }, styles.flex, style]}>{children}</View>
   );
 
   return <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>{content}</SafeAreaView>;

@@ -1,6 +1,7 @@
 import { useLocalSearchParams } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 import { AppText } from "@/components/common/AppText";
+import { BackButton } from "@/components/common/BackButton";
 import { Screen } from "@/components/common/Screen";
 import { StatusBadge } from "@/components/common/StatusBadge";
 import { InfoCard } from "@/components/cards/InfoCard";
@@ -17,6 +18,7 @@ export function TicketDetailsScreen() {
   if (!ticket) {
     return (
       <Screen>
+        <BackButton />
         <AppText variant="title">Ticket</AppText>
         <AppText muted>{query.isLoading ? "Loading ticket..." : "Ticket not found."}</AppText>
       </Screen>
@@ -25,6 +27,7 @@ export function TicketDetailsScreen() {
 
   return (
     <Screen>
+      <BackButton />
       <InfoCard>
         <StatusBadge label={ticket.status} tone={ticket.status === "Resolved" ? "good" : "warning"} />
         <AppText variant="title">{ticket.title}</AppText>
