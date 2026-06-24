@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { router } from "expo-router";
 import { AppText } from "@/components/common/AppText";
+import { BackButton } from "@/components/common/BackButton";
 import { Screen } from "@/components/common/Screen";
 import { TextField } from "@/components/forms/TextField";
 import { colors, radius, spacing } from "@/constants/theme";
@@ -43,6 +44,7 @@ export function RaiseIssueScreen() {
 
   return (
     <Screen>
+      <BackButton />
       <AppText variant="title">Raise Issue</AppText>
       <AppText muted>Mock submission is stored in the helpdesk repository. Offline queue hooks are ready for production sync.</AppText>
       <TextField label="Scheme ID" value={schemeId} onChangeText={setSchemeId} autoCapitalize="characters" />

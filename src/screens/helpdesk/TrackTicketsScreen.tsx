@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, View } from "react-native";
 import { router } from "expo-router";
 import { Plus } from "lucide-react-native";
 import { AppText } from "@/components/common/AppText";
+import { BackButton } from "@/components/common/BackButton";
 import { Screen } from "@/components/common/Screen";
 import { StatusBadge } from "@/components/common/StatusBadge";
 import { InfoCard } from "@/components/cards/InfoCard";
@@ -14,6 +15,7 @@ export function TrackTicketsScreen() {
 
   return (
     <Screen refreshing={query.isFetching} onRefresh={() => query.refetch()}>
+      <BackButton />
       <View style={styles.header}>
         <View style={{ flex: 1 }}>
           <AppText variant="title">Helpdesk</AppText>

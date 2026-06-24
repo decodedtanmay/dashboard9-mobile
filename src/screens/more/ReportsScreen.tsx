@@ -1,4 +1,5 @@
 import { AppText } from "@/components/common/AppText";
+import { BackButton } from "@/components/common/BackButton";
 import { Screen } from "@/components/common/Screen";
 import { StatusBadge } from "@/components/common/StatusBadge";
 import { InfoCard } from "@/components/cards/InfoCard";
@@ -9,6 +10,7 @@ export function ReportsScreen() {
   const query = useMoreData();
   return (
     <Screen refreshing={query.isFetching} onRefresh={() => query.refetch()}>
+      <BackButton />
       <AppText variant="title">Reports</AppText>
       <AppText muted>Pre-generated report catalog. Download and native share will attach here when real file APIs are available.</AppText>
       {(query.data?.reports ?? []).map((report) => (
