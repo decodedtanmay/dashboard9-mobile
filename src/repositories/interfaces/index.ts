@@ -2,6 +2,7 @@ import {
   ChlorineData,
   CommunicationStatus,
   DashboardSummary,
+  EmailAcknowledgement,
   EmailAlertLog,
   GeoFilter,
   HelpdeskTicket,
@@ -74,9 +75,46 @@ export interface IReportRepository {
   getReports(): Promise<ReportFile[]>;
 }
 
+export interface AlertFilter {
+  alert_type?: string;
+  scheme_id?: string;
+  region?: string;
+  sent_date?: string;
+  page?: number;
+  limit?: number;
+}
+
+export interface AlertSummaryItem {
+  alert_type: string;
+  total_alerts: string;
+  affected_schemes: string;
+  affected_regions: string;
+  min_value: string | null;
+  max_value: string | null;
+  avg_value: string | null;
+}
+
 export interface IAlertRepository {
-  getAlerts(): Promise<EmailAlertLog[]>;
+  getAlerts(filters?: AlertFilter): Promise<EmailAlertLog[]>;
+  getAlertById?(id: number): Promise<EmailAlertLog | undefined>;
+  getAlertSummary?(date?: string): Promise<{ date: string; summary: AlertSummaryItem[] }>;
+  getDistinctDates?(): Promise<string[]>;
   acknowledgeAlert(id: number): Promise<void>;
+}
+
+export interface IAcknowledgementRepository {
+  getAcknowledgements(filters?: {
+    scheme_id?: string;
+    alert_type?: string;
+    sent_date?: string;
+    acknowledged?: 'true' | 'false' | 'all';
+    page?: number;
+    limit?: number;
+  }): Promise<EmailAcknowledgement[]>;
+  getStatus(schemeId: string, alertType: string, date?: string): Promise<EmailAcknowledgement[]>;
+  getByToken?(token: string): Promise<EmailAcknowledgement[]>;
+  markAcknowledged(id: number): Promise<EmailAcknowledgement>;
+  markTokenAcknowledged?(token: string): Promise<{ count: number }>;
 }
 
 export interface IVendorRepository {

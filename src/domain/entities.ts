@@ -317,6 +317,18 @@ export interface EmailAlertLog {
   acknowledged?: boolean;
 }
 
+export interface EmailAcknowledgement {
+  id: number;
+  token: string;
+  scheme_id: string;
+  alert_type: string;
+  engineer_email: string;
+  engineer_name?: string;
+  sent_date: string;
+  acknowledged_at?: string;  // ISO timestamp; undefined means NOT yet acknowledged
+  created_at: string;
+}
+
 export interface DashboardSummary {
   totalSchemes: number;
   totalVillages: number;
